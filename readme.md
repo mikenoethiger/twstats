@@ -79,15 +79,14 @@ column -s, -t < stats.csv | less -#2 -N -S
 
 # Cronjob
 
-Tribalwars updates world stats every ~1 hour, if you want to collect stats for a longer period you could configure a 
-[cronjob](https://linuxhandbook.com/crontab/) to execute the python script periodically and append the csv output to a file.
+Tribalwars updates world stats every ~1 hour, if you want to fetch stats periodically, you could configure a [cronjob](https://linuxhandbook.com/crontab/).
 
 Cronjob for executing the script every full hour:
 ```
 0 * * * * python3 /path/to/fetchstats.py https://en.tribalwars.net >> /path/to/stats.csv 2>>/path/to/log.txt
 ```
 
-    There are [websites](https://crontab.guru) which help finding the desired cron periodicity.
+There are [websites](https://crontab.guru) which help finding the desired cron periodicity.
 
 I have created a `Dockerfile` and `docker-compose.yml` to deploy a docker container which executes the script 
 every full hour and appends data to `data/twstats.csv` and logs to `data/twstats.log`.

@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  cron:
+    build: .
+    volumes:
+      - ./fetchstats.py:/fetchstats.py:ro
+      - ./servers.txt:/servers.txt:ro
+      - ./data:/data

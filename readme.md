@@ -87,17 +87,17 @@ Cronjob for executing the script every full hour:
 0 * * * * python3 /path/to/fetchstats.py https://en.tribalwars.net >> /path/to/stats.csv 2>>/path/to/log.txt
 ```
 
-There are [websites](https://crontab.guru) available, which help figure out the desired cron periodicity.
+    There are [websites](https://crontab.guru) which help finding the desired cron periodicity.
 
-I have created a `Dockerfile` and `docker-compose.yml` to quickly create a docker container which executes the script 
-every full hour and appends data to `data/twstats.csv` and logs to `data/twstats.log` (the data directory is mapped into the container).
+I have created a `Dockerfile` and `docker-compose.yml` to deploy a docker container which executes the script 
+every full hour and appends data to `data/twstats.csv` and logs to `data/twstats.log`.
 
-The tribalwars servers to fetch stats from can be listed in `servers.txt` which will also be mounted into the container.
+You can list the tribalwars servers to fetch stats from in `servers.txt` (one per line).
 
-Start the docker container in background (remove `-d` to start it in the foreground):
+Start the docker container in background:
 ```
 $ docker-compose up -d
 ```
 
-If you want to change cron periodicity (for example once every day at midnight `0 0 * * *`), have a look at the `Dockerfile`.
-After modifying the `Dockerfile`, you'll have to run `docker-compose up -d --build` to trigger a rebuild of the image.
+In order to change cron periodicity (for example once every day at midnight `0 0 * * *`), have a look at the `Dockerfile`.
+After modifying the `Dockerfile`, run `docker-compose up -d --build` to trigger a rebuild of the image.
